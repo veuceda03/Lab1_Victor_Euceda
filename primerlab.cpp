@@ -42,6 +42,15 @@ void imprimir(int a1,int a2,int b1,int b2){
 	cout<<"Distancia: "<<d<<endl;
 }
 
+bool puntoscolineales(int x1,int x2,int x3,int x4,int y1,int y2,int y3,int y4){
+	if((x1==x2==x3)||(x1==x2==x4)||(x1==x3==x4)||(x2==x3==x4)){
+		return false;	
+	}else if((y1==y2==y3)||(y1==y2==y4)||(y1==y3==y4)||(y2==y3==y4)){
+		return false;
+	}else{
+		return true;
+	}
+}
 
 int main(int argc, char* argv[]){
 	int opcion;
@@ -61,22 +70,27 @@ int main(int argc, char* argv[]){
 		int x1,x2,x3,x4;
 		int y1,y2,y3,y4;
 		double diagonal;	
-		cout<<"X1= ";
-		cin>>x1;
-		cout<<"Y1= ";
-		cin>>y1;
-		cout<<"X2= ";                           
-                cin>>x2;
-                cout<<"Y2= ";                           
-                cin>>y2;
-		cout<<"X3= ";                           
-                cin>>x3;
-                cout<<"Y3= ";                           
-                cin>>y3;
-		cout<<"X4= ";                           
-                cin>>x4;
-                cout<<"Y4= ";                           
-                cin>>y4;
+		bool bandera=false;		
+		while(bandera==false){
+			cout<<"X1= ";
+			cin>>x1;
+			cout<<"Y1= ";
+			cin>>y1;
+			cout<<"X2= ";                           
+		        cin>>x2;
+		        cout<<"Y2= ";                           
+		        cin>>y2;
+			cout<<"X3= ";                           
+		        cin>>x3;
+		        cout<<"Y3= ";                           
+		        cin>>y3;
+			cout<<"X4= ";                           
+		        cin>>x4;
+		        cout<<"Y4= ";                           
+		        cin>>y4;
+			bandera=puntoscolineales(x1,x2,x3,x4,y1,y2,y3,y4);
+		}		
+		//		
 		diagonal=valordiagonal(x1,x4,y1,y4);
 		
 		cout<<" Lados del trapezoide: "<<endl;

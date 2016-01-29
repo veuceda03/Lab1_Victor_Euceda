@@ -1,0 +1,84 @@
+#include <iostream>
+#include <cmath>
+
+using std::cout;
+using std::cin;
+using std::endl;
+
+int factorial(int valor){
+	int fact=1;
+	for(int i=1;i<=valor;i++){
+		fact*=i;
+	}
+	return fact;
+}
+
+
+
+double  valoreuler(int valorx){
+	int denom,base=valorx;
+        double sumando,euler=1;
+	for(int i=1;i<=13;i++){
+		denom=factorial(i);
+		sumando=((pow(base,i))/denom);
+		euler+=sumando;		
+        }
+	return euler;
+}
+
+double valordiagonal(int a1,int a2,int b1,int b2){
+	double d;
+	int x=pow((a2-a1),2);
+	int y=pow((b2-b1),2);
+	d=pow((x+y),(0.5));
+	return d;
+}
+
+
+int main(int argc, char* argv[]){
+	int opcion;
+		
+	cout<< "Bienvenido"<<endl<<"1: Número de Euler"<<endl
+	<< "2: Área de trapezoide"<<endl;
+	cout<<" x= ";
+	cin>>opcion;
+
+	if(opcion==1){
+		int valorx;
+		cout<< "Número de Euler"<<endl;
+		cout<< "Ingrese el valor para x: ";
+		cin >>valorx; 
+		cout<< valoreuler(valorx)<<endl;	
+	}else if(opcion==2){
+		int x1,x2,x3,x4;
+		int y1,y2,y3,y4;
+		double diagonal;	
+		cout<<"X1= ";
+		cin>>x1;
+		cout<<"Y1= ";
+		cin>>y1;
+		cout<<"X2= ";                           
+                cin>>x2;
+                cout<<"Y2= ";                           
+                cin>>y2;
+		cout<<"X3= ";                           
+                cin>>x3;
+                cout<<"Y3= ";                           
+                cin>>y3;
+		cout<<"X4= ";                           
+                cin>>x4;
+                cout<<"Y4= ";                           
+                cin>>y4;
+		diagonal=valordiagonal(x1,x4,y1,y4);
+		
+		cout<<" Lados del trapezoide: "<<endl;
+		cout<<valordiagonal(x1,x2,y1,y2)<<endl;
+		cout<<valordiagonal(x1,x3,y1,y3)<<endl;
+		cout<<valordiagonal(x3,x4,y3,y4)<<endl;
+		cout<<valordiagonal(x4,x2,y4,y2)<<endl;								
+	}else{
+		cout<<"Escribió otro dato, vuelva a ejecutar"<<endl;
+	} 	
+
+
+}

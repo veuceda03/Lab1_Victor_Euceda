@@ -45,11 +45,42 @@ void imprimir(int a1,int a2,int b1,int b2){
 bool puntoscolineales(int x1,int x2,int x3,int x4,int y1,int y2,int y3,int y4){
 	if((x1==x2==x3)||(x1==x2==x4)||(x1==x3==x4)||(x2==x3==x4)){
 		return false;	
-	}else if((y1==y2==y3)||(y1==y2==y4)||(y1==y3==y4)||(y2==y3==y4)){
+	}
+	if((y1==y2==y3)||(y1==y2==y4)||(y1==y3==y4)||(y2==y3==y4)){
 		return false;
 	}else{
 		return true;
 	}
+}
+
+double semiperimetro(double a,double b,double c){
+	double semi=((a+b+c)/2);
+	cout<<endl<< "El semiperimetro es: "<<semi<<endl;
+	double peri=semi*2;
+	cout<<endl<< "Perimetro es: "<<peri<<endl;
+	return semi;
+}
+
+double altura(double semi,double a,double b,double c){
+	double haltura;
+	haltura=(2/a)*pow((semi*(semi-a)*(semi-b)*(semi-c)),0.5);
+	cout <<"Altura: "<<haltura<<endl;
+	return haltura;
+}
+
+double triangulo(int x1,int x2,int x3,int y1,int y2,int y3){
+	double a,b,c,semip;
+	a=valordiagonal(x1,x2,y1,y2);
+	b=valordiagonal(x1,x3,y1,y3);
+	c=valordiagonal(x2,x3,y2,y3);
+	semip=semiperimetro(a,b,c);
+	double h;
+	h=altura(semip,a,b,c);
+	h=altura(semip,b,a,c);
+	h=altura(semip,c,a,c);
+	double area=0.5*c*h;
+	cout<< " El área es: "<<area<<endl; 
+	return area;
 }
 
 int main(int argc, char* argv[]){
@@ -70,26 +101,8 @@ int main(int argc, char* argv[]){
 		int x1,x2,x3,x4;
 		int y1,y2,y3,y4;
 		double diagonal;	
-		bool bandera=false;		
+		bool bandera=false;
 		cout<<"X1= ";
-		cin>>x1;
-		cout<<"Y1= ";
-		cin>>y1;
-		cout<<"X2= ";                           
-                cin>>x2;
-                cout<<"Y2= ";                           
-                cin>>y2;
-		cout<<"X3= ";                           
-                cin>>x3;
-                cout<<"Y3= ";                           
-                cin>>y3;
-		cout<<"X4= ";                           
-                cin>>x4;
-                cout<<"Y4= ";                           
-                cin>>y4;
-		//
-		while(bandera==false){
-			cout<<"X1= ";
 			cin>>x1;
 			cout<<"Y1= ";
 			cin>>y1;
@@ -105,16 +118,29 @@ int main(int argc, char* argv[]){
 		        cin>>x4;
 		        cout<<"Y4= ";                           
 		        cin>>y4;
-		}		
+		bandera=puntoscolineales(x1,x2,x3,x4,y1,y2,y3,y4);
+		//
+		
 		//		
 		diagonal=valordiagonal(x1,x4,y1,y4);
 		
-		cout<<" Lados del trapezoide: "<<endl;
+		cout<<endl<<" Lados del trapezoide: "<<endl;
 		imprimir(x1,x2,y1,y2);
 		imprimir(x1,x3,y1,y3);
 		imprimir(x3,x4,y3,y4);
 		imprimir(x4,x2,y4,y2);
-
+		cout<<endl<<" Triangulo uno: "<<endl;
+		imprimir(x1,x3,y1,y3);
+		imprimir(x1,x4,y1,y4);
+		imprimir(x3,x4,y3,y4);
+		double area1=triangulo(x1,x3,x4,y1,y3,y4);
+		cout<<endl<<" Triangulo dos: "<<endl;
+		imprimir(x1,x2,y1,y2);
+		imprimir(x1,x4,y1,y4);
+		imprimir(x2,x4,y2,y4);
+		double area2=triangulo(x1,x2,x4,y1,y2,y4);
+		area1+=area2;
+		cout<<endl<<"El área del trapezoide es: "<<area1<<endl;
 									
 	}else{
 		cout<<"Escribió otro dato, vuelva a ejecutar"<<endl;

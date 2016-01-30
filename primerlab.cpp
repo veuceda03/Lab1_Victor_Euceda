@@ -43,14 +43,23 @@ void imprimir(int a1,int a2,int b1,int b2){
 }
 
 bool puntoscolineales(int x1,int x2,int x3,int x4,int y1,int y2,int y3,int y4){
-	if((x1==x2==x3)||(x1==x2==x4)||(x1==x3==x4)||(x2==x3==x4)){
-		return false;	
-	}
-	if((y1==y2==y3)||(y1==y2==y4)||(y1==y3==y4)||(y2==y3==y4)){
-		return false;
+	double pendiente1,pendiente2;	
+	if((x1!=0)||(x2!=0)){
+		pendiente1=((y2-y1)/(x2-x1));
+		pendiente2=((y3-y2)/(x3-x2));
+		if(pendiente1==pendiente2){
+			return false;
+		} else{
+			return true;
+		}	
 	}else{
-		return true;
+		if((x3==0)||(x4==0)){
+			return false;
+		}else{
+			return true;
+		}
 	}
+	
 }
 
 double semiperimetro(double a,double b,double c){
@@ -101,7 +110,7 @@ int main(int argc, char* argv[]){
 		int x1,x2,x3,x4;
 		int y1,y2,y3,y4;
 		double diagonal;	
-		bool bandera=false;
+		bool bandera;
 		cout<<"X1= ";
 			cin>>x1;
 			cout<<"Y1= ";
@@ -120,28 +129,29 @@ int main(int argc, char* argv[]){
 		        cin>>y4;
 		bandera=puntoscolineales(x1,x2,x3,x4,y1,y2,y3,y4);
 		//
-		
-		//		
-		diagonal=valordiagonal(x1,x4,y1,y4);
-		
-		cout<<endl<<" Lados del trapezoide: "<<endl;
-		imprimir(x1,x2,y1,y2);
-		imprimir(x1,x3,y1,y3);
-		imprimir(x3,x4,y3,y4);
-		imprimir(x4,x2,y4,y2);
-		cout<<endl<<" Triangulo uno: "<<endl;
-		imprimir(x1,x3,y1,y3);
-		imprimir(x1,x4,y1,y4);
-		imprimir(x3,x4,y3,y4);
-		double area1=triangulo(x1,x3,x4,y1,y3,y4);
-		cout<<endl<<" Triangulo dos: "<<endl;
-		imprimir(x1,x2,y1,y2);
-		imprimir(x1,x4,y1,y4);
-		imprimir(x2,x4,y2,y4);
-		double area2=triangulo(x1,x2,x4,y1,y2,y4);
-		area1+=area2;
-		cout<<endl<<"El área del trapezoide es: "<<area1<<endl;
-									
+		if(bandera==true){
+			//		
+			diagonal=valordiagonal(x1,x4,y1,y4);
+			cout<<endl<<" Lados del trapezoide: "<<endl;
+			imprimir(x1,x2,y1,y2);
+			imprimir(x1,x3,y1,y3);
+			imprimir(x3,x4,y3,y4);
+			imprimir(x4,x2,y4,y2);
+			cout<<endl<<" Triangulo uno: "<<endl;
+			imprimir(x1,x3,y1,y3);
+			imprimir(x1,x4,y1,y4);
+			imprimir(x3,x4,y3,y4);
+			double area1=triangulo(x1,x3,x4,y1,y3,y4);
+			cout<<endl<<" Triangulo dos: "<<endl;
+			imprimir(x1,x2,y1,y2);
+			imprimir(x1,x4,y1,y4);
+			imprimir(x2,x4,y2,y4);
+			double area2=triangulo(x1,x2,x4,y1,y2,y4);
+			area1+=area2;
+			cout<<endl<<"El área del trapezoide es: "<<area1<<endl;
+		}else{
+			cout<<"Ingresó mal los puntos, vuelva a compilar"<<endl;
+		}									
 	}else{
 		cout<<"Escribió otro dato, vuelva a ejecutar"<<endl;
 	} 	

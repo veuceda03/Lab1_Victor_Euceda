@@ -128,6 +128,9 @@ int main(int argc, char* argv[]){
 		        cout<<"Y4= ";                           
 		        cin>>y4;
 		bandera=puntoscolineales(x1,x2,x3,x4,y1,y2,y3,y4);
+		if(bandera==true){
+			bandera=puntoscolineales(x1,x2,x4,x3,y1,y2,y4,y3);
+		}
 		//
 		if(bandera==true){
 			//		
